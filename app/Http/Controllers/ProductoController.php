@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
-use App\Models\Oproducto;
-use Illuminate\Http\Request;
+use App\Events\AdministradorOperaciones;
 use App\Http\Requests\StoreProductoRequest;
+use App\Models\Producto;
+use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
@@ -18,7 +18,7 @@ class ProductoController extends Controller
     {
         $paginator = Producto::orderBy('created_at', 'desc')->Paginate(5);
         return jsend_success([
-            'productos' => $paginator->items(),
+            'productos' =>  $paginator->items(),
             'total_pages' => $paginator->lastPage(),
         ]);
     }
@@ -37,12 +37,9 @@ class ProductoController extends Controller
 
         foreach ($nuevos_productos as  $nuevo_producto) {
             $producto = Producto::create($nuevo_producto);
-
-            $oproducto = new Oproducto();
-            $oproducto->accion = "ALTA";
-            $oproducto->producto_id = $producto->id;
-            $oproducto->usuario_id = $usuario_id;
-            $oproducto->save();
+            event(
+                new AdministradorOperaciones($producto, $usuario_id, 'ALTA', 'PRODUCTO')
+            );
         }
 
         $this->sincronizarFirebase();

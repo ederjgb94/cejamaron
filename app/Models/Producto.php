@@ -12,8 +12,10 @@ class Producto extends Model
         'codigo',
         'nombre',
         'presentacion',
+        'iva',
         'menudeo',
         'mayoreo',
+        'cantidad_mayoreo',
         'especial',
         'vendedor',
         'imagen',
@@ -21,8 +23,4 @@ class Producto extends Model
         'medida_id',
         'categoria_id',
     ];
-
-    // protected $rules = [
-    //     'codigo' => 'required',
-    // ];
 }

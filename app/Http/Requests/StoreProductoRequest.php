@@ -29,7 +29,11 @@ class StoreProductoRequest extends FormRequest
     {
         return [
             'usuario_id' => 'required',
-            'nuevos_productos.*.codigo' => 'required',
+            'nuevos_productos.*.codigo' => 'required|max:255',
+            'nuevos_productos.*.nombre' => 'required|max:255',
+            'nuevos_productos.*.presentacion' => 'max:255',
+            // 'nuevos_productos.*.iva' => 'regex:/^\d*(\.\d{1,2})?$/',
+
         ];
     }
 
