@@ -32,11 +32,12 @@ Route::apiResource('medida', 'MedidaController');
 Route::post('medida/activate/{medida}', 'MedidaController@activate')->name('medida.activate');
 Route::post('medida/disable/{medida}', 'MedidaController@disable')->name('medida.disable');
 
-Route::get('categoria', 'CategoriaController@index')->name("categoria.index");
-Route::post('categoria', 'CategoriaController@store')->name("categoria.store");
-Route::match(['put', 'patch'], 'categoria/{categoria}', 'CategoriaController@update')->name("categoria.update");
-Route::get('categoria/{categoria}', 'CategoriaController@show')->name("categoria.show");
-Route::delete('categoria/{categoria}', 'CategoriaController@destroy')->name("categoria.destroy");
+Route::apiResource('categoria', 'CategoriaController');
+// Route::get('categoria', 'CategoriaController@index')->name("categoria.index");
+// Route::post('categoria', 'CategoriaController@store')->name("categoria.store");
+// Route::match(['put', 'patch'], 'categoria/{categoria}', 'CategoriaController@update')->name("categoria.update");
+// Route::get('categoria/{categoria}', 'CategoriaController@show')->name("categoria.show");
+// Route::delete('categoria/{categoria}', 'CategoriaController@destroy')->name("categoria.destroy");
 Route::post('categoria/activate/{categoria}', 'CategoriaController@activate')->name('categoria.activate');
 Route::post('categoria/disable/{categoria}', 'CategoriaController@disable')->name('categoria.disable');
 
