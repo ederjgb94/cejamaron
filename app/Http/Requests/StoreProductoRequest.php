@@ -43,14 +43,6 @@ class StoreProductoRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'usuario_id.required' => 'Se necesita un usuario para realizar esta acción',
-            'nuevos_productos.*.codigo.required' => 'Todos los productos deben contener un código',
-        ];
-    }
-
     protected function failedValidation(Validator $validator)
     {
         $errors = (new ValidationException($validator))->errors();
