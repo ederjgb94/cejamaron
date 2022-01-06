@@ -6,6 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use TypeError;
 
 class Handler extends ExceptionHandler
 {
@@ -46,7 +47,12 @@ class Handler extends ExceptionHandler
         });
         $this->renderable(function (QueryException $e, $request) {
             if ($request->is('api/*')) {
-                return jsend_error("No encontrado2");
+                return jsend_error("Error en la consulta");
+            }
+        });
+        $this->renderable(function (TypeError $e, $request){
+            if($request->is('api/*')){
+                return jsend_error("Formatos no validos");
             }
         });
     }

@@ -26,7 +26,6 @@ class CreateProductosTable extends Migration
             $table->integer('cantidad_mayoreo')->default(0);
             $table->decimal('especial')->default(0);
             $table->decimal('vendedor')->default(0);
-            $table->string('imagen')->default('404');
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });

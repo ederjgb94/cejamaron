@@ -18,8 +18,6 @@ class Producto extends Model
         'cantidad_mayoreo',
         'especial',
         'vendedor',
-        'imagen',
-        'activo',
         'medida_id',
         'categoria_id',
     ];

@@ -19,7 +19,6 @@ class CreateUsuariosTable extends Migration
             $table->string('correo');
             $table->boolean('confirmacion')->default(false);
             $table->string('telefono');
-            $table->string('imagen')->default('404');
             $table->string('usuario');
             $table->string('clave');
             $table->boolean('activo')->default(true);

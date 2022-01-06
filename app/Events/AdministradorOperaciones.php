@@ -41,10 +41,14 @@ class AdministradorOperaciones
     public function operacion($operacion)
     {
         switch ($operacion) {
-            case "ALTA":
+            case "CREAR":
                 return 1;
-            case "BAJA":
+            case "ACTUALIZAR":
                 return 2;
+            case "ACTIVAR":
+                return 3;
+            case "DESACTIVAR":
+                return 4;
         }
     }
 

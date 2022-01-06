@@ -18,10 +18,13 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::apiResource('producto', 'ProductoController');
-Route::post('sincronizar_catalogo', 'ProductoController@sincronizar_catalogo')->name('producto.sincronizar_catalogo');
-Route::post('producto/activate/{producto}', 'ProductoController@activate')->name('producto.activate');
-Route::post('producto/disable/{producto}', 'ProductoController@disable')->name('producto.disable');
+Route::middleware('jsonapi.validate')->group(function () {
+    Route::apiResource('producto', 'ProductoController')->except('destroy');
+    Route::post('sincronizar_catalogo', 'ProductoController@sincronizar_catalogo')->name('producto.sincronizar_catalogo');
+    Route::post('producto/activar/{producto}', 'ProductoController@activar')->name('producto.activar');
+    Route::post('producto/desactivar/{producto}', 'ProductoController@desactivar')->name('producto.desactivar');
+});
+
 
 Route::apiResource('usuario', 'UsuarioController');
 Route::post('usuario/login', 'UsuarioController@login')->name('usuario.login');
@@ -41,6 +44,6 @@ Route::apiResource('categoria', 'CategoriaController');
 Route::post('categoria/activate/{categoria}', 'CategoriaController@activate')->name('categoria.activate');
 Route::post('categoria/disable/{categoria}', 'CategoriaController@disable')->name('categoria.disable');
 
-Route::apiResource('oproducto', 'OproductoController');
-Route::post('oproducto/confirm/{oproducto}', 'OproductoController@confirm')->name('oproducto.confirm');
-Route::post('oproducto/unconfirm/{oproducto}', 'OproductoController@unconfirm')->name('oproducto.unconfirm');
+// Route::apiResource('oproducto', 'OproductoController');
+// Route::post('oproducto/confirm/{oproducto}', 'OproductoController@confirm')->name('oproducto.confirm');
+// Route::post('oproducto/unconfirm/{oproducto}', 'OproductoController@unconfirm')->name('oproducto.unconfirm');
