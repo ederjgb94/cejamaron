@@ -65,24 +65,14 @@ class UsuarioController extends Controller
         $this->sincronizarFirebase();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Usuario $usuario)
-    {
-    }
-
-    public function disable(Usuario $usuario)
+    public function desactivar(Usuario $usuario)
     {
         $usuario->activo = false;
         $usuario->save();
         $this->sincronizarFirebase();
     }
 
-    public function activate(Usuario $usuario)
+    public function activar(Usuario $usuario)
     {
         $usuario->activo  = true;
         $usuario->save();

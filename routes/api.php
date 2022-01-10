@@ -23,27 +23,20 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::post('sincronizar_catalogo', 'ProductoController@sincronizar_catalogo')->name('producto.sincronizar_catalogo');
     Route::post('producto/activar/{producto}', 'ProductoController@activar')->name('producto.activar');
     Route::post('producto/desactivar/{producto}', 'ProductoController@desactivar')->name('producto.desactivar');
+
+    Route::apiResource('cupon', 'CuponController');
+
+    Route::apiResource('usuario', 'UsuarioController');
+    Route::post('usuario/login', 'UsuarioController@login')->name('usuario.login');
+    Route::post('usuario/activar/{usuario}', 'UsuarioController@activar')->name('usuario.activar');
+    Route::post('usuario/desactivar/{usuario}', 'UsuarioController@desactivar')->name('usuario.desactivar');
+
+    Route::apiResource('medida', 'MedidaController');
+    Route::post('medida/activar/{medida}', 'MedidaController@activar')->name('medida.activar');
+    Route::post('medida/desactivar/{medida}', 'MedidaController@desactivar')->name('medida.desactivar');
+
+    Route::apiResource('categoria', 'CategoriaController');
+    Route::post('categoria/activar/{categoria}', 'CategoriaController@activar')->name('categoria.activar');
+    Route::post('categoria/desactivar/{categoria}', 'CategoriaController@desactivar')->name('categoria.desactivar');
+
 });
-
-
-Route::apiResource('usuario', 'UsuarioController');
-Route::post('usuario/login', 'UsuarioController@login')->name('usuario.login');
-Route::post('usuario/activate/{usuario}', 'UsuarioController@activate')->name('usuario.activate');
-Route::post('usuario/disable/{usuario}', 'UsuarioController@disable')->name('usuario.disable');
-
-Route::apiResource('medida', 'MedidaController');
-Route::post('medida/activate/{medida}', 'MedidaController@activate')->name('medida.activate');
-Route::post('medida/disable/{medida}', 'MedidaController@disable')->name('medida.disable');
-
-Route::apiResource('categoria', 'CategoriaController');
-// Route::get('categoria', 'CategoriaController@index')->name("categoria.index");
-// Route::post('categoria', 'CategoriaController@store')->name("categoria.store");
-// Route::match(['put', 'patch'], 'categoria/{categoria}', 'CategoriaController@update')->name("categoria.update");
-// Route::get('categoria/{categoria}', 'CategoriaController@show')->name("categoria.show");
-// Route::delete('categoria/{categoria}', 'CategoriaController@destroy')->name("categoria.destroy");
-Route::post('categoria/activate/{categoria}', 'CategoriaController@activate')->name('categoria.activate');
-Route::post('categoria/disable/{categoria}', 'CategoriaController@disable')->name('categoria.disable');
-
-// Route::apiResource('oproducto', 'OproductoController');
-// Route::post('oproducto/confirm/{oproducto}', 'OproductoController@confirm')->name('oproducto.confirm');
-// Route::post('oproducto/unconfirm/{oproducto}', 'OproductoController@unconfirm')->name('oproducto.unconfirm');

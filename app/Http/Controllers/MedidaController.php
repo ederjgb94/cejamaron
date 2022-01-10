@@ -14,7 +14,9 @@ class MedidaController extends Controller
      */
     public function index()
     {
-        return Medida::all();
+        return jsend_success(
+            ['medidas'=> Medida::all()],
+        );
     }
 
     /**
@@ -25,9 +27,9 @@ class MedidaController extends Controller
      */
     public function store(Request $request)
     {
-        $medida = new Medida();
-        $medida->create($request->all());
+        Medida::create($request->all());
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 
     /**
@@ -38,7 +40,7 @@ class MedidaController extends Controller
      */
     public function show(Medida $medida)
     {
-        return $medida;
+        return jsend_success(['medida'=>$medida]);
     }
 
     /**
@@ -52,16 +54,7 @@ class MedidaController extends Controller
     {
         $medida->update($request->all());
         $this->sincronizarFirebase();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Medida  $medida
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Medida $medida)
-    {
+        return jsend_success();
     }
 
     public function disable(Medida $medida)
@@ -69,6 +62,7 @@ class MedidaController extends Controller
         $medida->activo = false;
         $medida->save();
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 
     public function activate(Medida $medida)
@@ -76,5 +70,6 @@ class MedidaController extends Controller
         $medida->activo = true;
         $medida->save();
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 }

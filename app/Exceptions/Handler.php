@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
         });
         $this->renderable(function (QueryException $e, $request) {
             if ($request->is('api/*')) {
-                return jsend_error("Error en la consulta");
+                return jsend_error("Error en la consulta",null,$e);
             }
         });
         $this->renderable(function (TypeError $e, $request){

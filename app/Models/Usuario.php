@@ -17,4 +17,8 @@ class Usuario extends Model
         'clave',
         'activo'
     ];
+
+    public function sucursales(){
+        return $this->belongsToMany(Sucursal::class);
+    }
 }

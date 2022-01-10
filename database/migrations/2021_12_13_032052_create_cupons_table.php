@@ -15,16 +15,19 @@ class CreateCuponsTable extends Migration
     {
         Schema::create('cupons', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');
+            $table->string('codigo')->unique();
             $table->decimal('descuento');
             $table->decimal('descuento_maximo');
             $table->decimal('monto_minimo');
             $table->date('fecha_expiracion');
-            $table->integer('usos');
-            $table->string('sucursales'); // CheckBox de Id_Sucursales [1,2,3..]
+            $table->integer('usos')->default(1);
+            $table->json('sucursales'); // CheckBox de Id_Sucursales [1,2,3..]
             $table->boolean('es_porcentaje');
-            $table->boolean('activo');
+            $table->boolean('activo')->default(true);
             $table->timestamps();
+        });
+        Schema::table('cupons', function (Blueprint $table) {
+            $table->foreignId('usuario_id')->constrained();
         });
     }
 

@@ -14,7 +14,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return Categoria::all();
+        return jsend_success(['categorias'=>Categoria::all()]);
     }
 
     /**
@@ -25,9 +25,9 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria = new Categoria();
-        $categoria->create($request->all());
+        Categoria::create($request->all());
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        return $categoria;
+        return jsend_success(['categoria'=>$categoria]);
     }
 
     /**
@@ -52,29 +52,22 @@ class CategoriaController extends Controller
     {
         $categoria->update($request->all());
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Categoria $categoria)
-    {
-    }
-
-    public function disable(Categoria $categoria)
+    public function desactivar(Categoria $categoria)
     {
         $categoria->activo = false;
         $categoria->save();
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 
-    public function activate(Categoria $categoria)
+    public function activar(Categoria $categoria)
     {
         $categoria->activo = true;
         $categoria->save();
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 }

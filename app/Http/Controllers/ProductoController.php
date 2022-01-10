@@ -18,10 +18,10 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $paginator = Producto::orderBy('created_at', 'desc')->Paginate(5);
+        $paginador = Producto::orderBy('created_at', 'desc')->Paginate(5);
         return jsend_success([
-            'productos' =>  $paginator->items(),
-            'total_pages' => $paginator->lastPage(),
+            'paginas' => $paginador->lastPage(),
+            'productos' =>  $paginador->items(),
         ]);
     }
 
