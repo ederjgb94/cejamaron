@@ -33,5 +33,10 @@ class DatabaseSeeder extends Seeder
                 $sucursal->usuarios()->attach($usuario);
             }
         }
+        $usuario_root = Usuario::find(1);
+        $usuario_root->es_raiz = true;
+        $usuario_root->usuario = 'admin';
+        $usuario_root->clave = '123';
+        $usuario_root->save();
     }
 }

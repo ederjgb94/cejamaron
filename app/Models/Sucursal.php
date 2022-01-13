@@ -10,16 +10,16 @@ class Sucursal extends Model
     use HasFactory;
 
     protected $fillable = [
-        'mac1',
-        'mac2',
-        'mac3',
-        'mac4',
+        'puerta_enlace1',
+        'puerta_enlace2',
+        'puerta_enlace3',
+        'puerta_enlace4',
         'codigo_remoto',
         'razon_social',
         'correo',
     ];
 
     public function usuarios(){
-        return $this->belongsToMany(Usuario::class);
+        return $this->belongsToMany(Usuario::class)->withTimestamps();
     }
 }

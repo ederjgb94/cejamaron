@@ -12,13 +12,16 @@ class Usuario extends Model
         'nombre',
         'correo',
         'telefono',
-        'imagen',
         'usuario',
         'clave',
         'activo'
     ];
 
-    public function sucursales(){
-        return $this->belongsToMany(Sucursal::class);
+    public function sucursals(){
+        return $this->belongsToMany(Sucursal::class)->withTimestamps();
+    }
+
+    public function cupons(){
+        return $this->hasMany(Cupon::class);
     }
 }

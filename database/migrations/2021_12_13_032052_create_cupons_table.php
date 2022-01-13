@@ -27,7 +27,7 @@ class CreateCuponsTable extends Migration
             $table->timestamps();
         });
         Schema::table('cupons', function (Blueprint $table) {
-            $table->foreignId('usuario_id')->constrained();
+            $table->foreignId('usuario_id')->constrained()->onDelete('cascade');
         });
     }
 

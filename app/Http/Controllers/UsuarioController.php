@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Http\Requests\ActivoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,7 +16,11 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return Usuario::all();
+        $paginador = Usuario::orderBy('created_at', 'desc')->Paginate(5);
+        return jsend_success([
+            'paginas' => $paginador->lastPage(),
+            'usuarios' =>  $paginador->items(),
+        ]);
     }
 
     /**
@@ -26,19 +31,19 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $checarUsuarioCorreo = Usuario::where('usuario', '=', $request->usuario)
-            ->where('correo', '=', $request->correo)->first();
-        if ($checarUsuarioCorreo) return response('Correo o Usario en uso', 400);
-        $usuario = new Usuario();
-        $usuario->create($request->all());
+        Usuario::create($request->all());
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 
     public function login(Request $request)
     {
         $usuario = Usuario::where('usuario', '=', $request->usuario)
             ->where('clave', '=', $request->clave)->first();
-        return $usuario ? $usuario : [];
+        return $usuario ? 
+        jsend_success() : jsend_fail([
+            'message'=>'Cuenta invalida',
+        ]);
     }
 
     /**
@@ -49,7 +54,9 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        return $usuario;
+        return jsend_success(
+            ['usuario'=>$usuario]
+        );
     }
 
     /**
@@ -63,19 +70,32 @@ class UsuarioController extends Controller
     {
         $usuario->update($request->all());
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 
-    public function desactivar(Usuario $usuario)
+    public function desactivar(ActivoRequest $request, Usuario $usuario)
     {
         $usuario->activo = false;
         $usuario->save();
         $this->sincronizarFirebase();
+        return jsend_success();
     }
 
-    public function activar(Usuario $usuario)
+    public function activar(ActivoRequest $request, Usuario $usuario)
     {
         $usuario->activo  = true;
         $usuario->save();
         $this->sincronizarFirebase();
+        return jsend_success();
+    }
+
+    public function sincronizar(Request $request)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $usuarios =  Usuario::where('updated_at', '>', $fecha_de_actualizacion)->get();
+
+        return jsend_success([
+            'usuarios' => $usuarios,
+        ],);
     }
 }

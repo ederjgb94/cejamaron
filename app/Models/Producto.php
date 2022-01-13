@@ -21,4 +21,8 @@ class Producto extends Model
         'medida_id',
         'categoria_id',
     ];
+
+    public function medida(){
+        return $this->belongsTo(Medida::class);
+    }
 }

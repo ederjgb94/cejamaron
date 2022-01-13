@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ActivoRequest;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SucursalController extends Controller
 {
@@ -14,7 +16,10 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        //
+        return jsend_success(
+            ['sucursales' => Sucursal::orderBy('id', 'desc')
+                ->paginate(10)]
+        );
     }
 
     /**
@@ -25,7 +30,14 @@ class SucursalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $codigo = '';
+        do {
+            $codigo = strtoupper(Str::random(4));
+        } while (Sucursal::where('codigo_remoto', $codigo)->exists());
+        $request->merge(['codigo_remoto' => $codigo]);
+        Sucursal::create($request->all());
+        $this->sincronizarFirebase();
+        return jsend_success();
     }
 
     /**
@@ -36,7 +48,9 @@ class SucursalController extends Controller
      */
     public function show(Sucursal $sucursal)
     {
-        //
+        return jsend_success(
+            ['sucursal' => $sucursal]
+        );
     }
 
     /**
@@ -48,17 +62,22 @@ class SucursalController extends Controller
      */
     public function update(Request $request, Sucursal $sucursal)
     {
-        //
+        $sucursal->update($request->all());
+        $this->sincronizarFirebase();
+        return jsend_success();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Sucursal  $sucursal
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Sucursal $sucursal)
+    public function activar(ActivoRequest $request, Sucursal $sucursal)
     {
-        //
+        $sucursal->activo = true;
+        $this->sincronizarFirebase();
+        return jsend_success();
+    }
+
+    public function desactivar(ActivoRequest $request, Sucursal $sucursal)
+    {
+        $sucursal->activo = false;
+        $this->sincronizarFirebase();
+        return jsend_success();
     }
 }

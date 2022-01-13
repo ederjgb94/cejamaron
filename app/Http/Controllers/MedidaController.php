@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medida;
+use App\Http\Requests\ActivoRequest;
 use Illuminate\Http\Request;
 
 class MedidaController extends Controller
@@ -57,7 +58,7 @@ class MedidaController extends Controller
         return jsend_success();
     }
 
-    public function disable(Medida $medida)
+    public function desactivar(ActivoRequest $request, Medida $medida)
     {
         $medida->activo = false;
         $medida->save();
@@ -65,11 +66,21 @@ class MedidaController extends Controller
         return jsend_success();
     }
 
-    public function activate(Medida $medida)
+    public function activate(ActivoRequest $request, Medida $medida)
     {
         $medida->activo = true;
         $medida->save();
         $this->sincronizarFirebase();
         return jsend_success();
+    }
+
+    public function sincronizar(Request $request)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $medidas =  Medida::where('updated_at', '>', $fecha_de_actualizacion)->get();
+
+        return jsend_success([
+            'medidas' => $medidas,
+        ],);
     }
 }

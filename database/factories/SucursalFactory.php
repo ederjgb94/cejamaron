@@ -15,11 +15,11 @@ class SucursalFactory extends Factory
     public function definition()
     {
         return [
-            'mac1'=>Str::random(5),
-            'mac2'=>Str::random(5),
-            'mac3'=>Str::random(5),
-            'mac4'=>Str::random(5),
-            'codigo_remoto'=>Str::random(5),
+            'puerta_enlace1'=>Str::random(5),
+            'puerta_enlace2'=>Str::random(5),
+            'puerta_enlace3'=>Str::random(5),
+            'puerta_enlace4'=>Str::random(5),
+            'codigo_remoto'=>strtoupper(Str::random(4)),
             'razon_social'=>$this->faker->name(),
             'correo'=>$this->faker->unique()->safeEmail(),
         ];

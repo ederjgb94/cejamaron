@@ -20,4 +20,8 @@ class Cupon extends Model
         'es_porcentaje',
         'usuario_id',
     ];
+
+    public function usuario(){
+        return $this->belongsTo(Usuario::class);
+    }
 }

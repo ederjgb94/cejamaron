@@ -18,7 +18,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $paginador = Producto::orderBy('created_at', 'desc')->Paginate(5);
+        $paginador = Producto::orderBy('id', 'desc')->Paginate(10);
         return jsend_success([
             'paginas' => $paginador->lastPage(),
             'productos' =>  $paginador->items(),
@@ -106,7 +106,7 @@ class ProductoController extends Controller
         return jsend_success();
     }
     
-    public function sincronizar_catalogo(Request $request)
+    public function sincronizar(Request $request)
     {
         $fecha_de_actualizacion = $request->fecha_de_actualizacion;
         $productos =  Producto::where('updated_at', '>', $fecha_de_actualizacion)->get();

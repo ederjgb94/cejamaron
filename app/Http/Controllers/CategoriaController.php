@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Http\Requests\ActivoRequest;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -55,7 +56,7 @@ class CategoriaController extends Controller
         return jsend_success();
     }
 
-    public function desactivar(Categoria $categoria)
+    public function desactivar(ActivoRequest $request, Categoria $categoria)
     {
         $categoria->activo = false;
         $categoria->save();
@@ -63,11 +64,21 @@ class CategoriaController extends Controller
         return jsend_success();
     }
 
-    public function activar(Categoria $categoria)
+    public function activar(ActivoRequest $request, Categoria $categoria)
     {
         $categoria->activo = true;
         $categoria->save();
         $this->sincronizarFirebase();
         return jsend_success();
+    }
+
+    public function sincronizar(Request $request)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $categorias =  Categoria::where('updated_at', '>', $fecha_de_actualizacion)->get();
+
+        return jsend_success([
+            'categorias' => $categorias,
+        ],);
     }
 }

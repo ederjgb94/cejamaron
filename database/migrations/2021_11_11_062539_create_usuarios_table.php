@@ -21,6 +21,7 @@ class CreateUsuariosTable extends Migration
             $table->string('telefono');
             $table->string('usuario');
             $table->string('clave');
+            $table->boolean('es_raiz')->default(false);
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });
