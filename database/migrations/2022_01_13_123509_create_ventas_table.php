@@ -19,7 +19,9 @@ class CreateVentasTable extends Migration
             $table->string('folio');
             $table->date('fecha_venta');
             $table->integer('metodo_pago'); // [1]Efectivo, [2]Debito, [3]Credito
+            $table->integer('tipo');//[1]Normal [2]Vendedor [3]Especial,
             $table->foreignId('sucursal_id')->constrained()->onDelete('cascade');
+            $table->foreignId('usuario_id')->nullable()->constrained();
             $table->boolean('cancelacion')->default(false);
             $table->timestamps();
         });

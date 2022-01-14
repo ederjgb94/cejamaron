@@ -22,7 +22,20 @@ class Producto extends Model
         'categoria_id',
     ];
 
-    public function medida(){
+    public function medida()
+    {
         return $this->belongsTo(Medida::class);
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+
+    public function ventas()
+    {
+        return $this->belongsToMany(Venta::class)
+            ->withTimestamps()
+            ->withPivot(['cantidad', 'precio_venta']);
     }
 }

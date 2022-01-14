@@ -47,4 +47,6 @@ class SucursalUsuarioController extends Controller
         $sucursal->usuarios()->detach($usuario);
         return jsend_success();
     }
+
+    
 }

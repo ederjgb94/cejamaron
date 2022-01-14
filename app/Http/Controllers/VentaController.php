@@ -29,7 +29,14 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-        Venta::create($request->all());
+        $venta = Venta::create($request->all());
+        $productos = $request['productos'];
+        foreach ($productos as $producto) {
+            $venta->productos()->attach($producto['id'], [
+                'cantidad' => $producto['cantidad'],
+                'precio_venta'=>$producto['precio_venta'],
+            ]);
+        }
         return jsend_success();
     }
 
@@ -42,7 +49,7 @@ class VentaController extends Controller
     public function show(Venta $venta)
     {
         return jsend_success(
-            ['venta'=>$venta],
+            ['venta' => $venta],
         );
     }
 
@@ -59,10 +66,10 @@ class VentaController extends Controller
         return jsend_success();
     }
 
-    public function cancelar(Venta $venta){
-        $venta->cancelacion=true;
+    public function cancelar(Venta $venta)
+    {
+        $venta->cancelacion = true;
         $venta->save();
         return jsend_success();
     }
-
 }

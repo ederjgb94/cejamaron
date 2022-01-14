@@ -9,7 +9,9 @@ use App\models\Categoria;
 use App\models\Producto;
 use App\models\Usuario;
 use App\models\Cupon;
+use App\Models\Entrada;
 use App\Models\Sucursal;
+use App\Models\Venta;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,7 +27,7 @@ class DatabaseSeeder extends Seeder
         Categoria::factory()->count(10)->create();
         Producto::factory()->count(20)->create();
         Cupon::factory()->count(10)->create();
-        Sucursal::factory()->count(5)->create();
+        Sucursal::factory()->count(10)->create();
         for ($i=1; $i < 4; $i++) { 
             $sucursal = Sucursal::find($i);
             for ($j=1; $j < 4; $j++) {
@@ -38,5 +40,17 @@ class DatabaseSeeder extends Seeder
         $usuario_root->usuario = 'admin';
         $usuario_root->clave = '123';
         $usuario_root->save();
+
+        for ($i=0; $i < 4; $i++) {
+            $venta = Venta::factory()->create();
+            for ($j=1; $j <= 3; $j++) {
+                $producto = Producto::find($j);
+                $venta->productos()->attach($producto, [
+                    'cantidad'=>random_int(1,10),
+                    'precio_venta'=>$producto->menudeo,
+                ]);
+            }
+        }
+        Entrada::factory()->count(10)->create();
     }
 }

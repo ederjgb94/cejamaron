@@ -80,4 +80,14 @@ class SucursalController extends Controller
         $this->sincronizarFirebase();
         return jsend_success();
     }
+
+    public function sincronizar(Request $request)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $sucursales =  Sucursal::where('updated_at', '>', $fecha_de_actualizacion)->get();
+
+        return jsend_success([
+            'sucursales' => $sucursales,
+        ],);
+    }
 }

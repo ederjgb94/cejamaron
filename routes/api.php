@@ -64,6 +64,7 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::post('sucursales', 'SucursalController@store')->name('sucursales.store');
     Route::match(['put', 'patch'], 'sucursales/{sucursal}', 'SucursalController@update')->name('sucursales.update');
     Route::get('sucursales/{sucursal}', 'SucursalController@show')->name('sucursales.show');
+    Route::post('sucursales/sincronizar', 'SucursalController@sincronizar')->name('sucursales.sincronizar');
 
     Route::get('sucursales/{sucursal}/usuarios', 'SucursalUsuarioController@index')->name('sucursales.usuarios.index');
     Route::post('sucursales/{sucursal}/usuarios/{usuario}', 'SucursalUsuarioController@store')->name('sucursales.usuarios.store');
