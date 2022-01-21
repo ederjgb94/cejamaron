@@ -22,6 +22,10 @@ class Producto extends Model
         'categoria_id',
     ];
 
+    protected $hidden = [
+        'pivot'
+    ];
+
     public function medida()
     {
         return $this->belongsTo(Medida::class);
@@ -37,5 +41,15 @@ class Producto extends Model
         return $this->belongsToMany(Venta::class)
             ->withTimestamps()
             ->withPivot(['cantidad', 'precio_venta']);
+    }
+
+    public function sucursales(){
+        return $this->belongsToMany(Sucursal::class)->withTimestamps()
+        ->withPivot(['cantidad']);
+    }
+
+    public function entradas(){
+        return $this->belongsToMany(Entrada::class)->withTimestamps()
+        ->withPivot(['costo','cantidad']);
     }
 }

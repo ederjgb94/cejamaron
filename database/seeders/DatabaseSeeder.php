@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Usuario::factory()->count(10)->create();
-        Medida::factory()->count(10)->create();
-        Categoria::factory()->count(10)->create();
-        Producto::factory()->count(20)->create();
-        Cupon::factory()->count(10)->create();
+        Usuario::factory()->count(1000)->create();
+        Medida::factory()->count(100)->create();
+        Categoria::factory()->count(100)->create();
+        Producto::factory()->count(4000)->create();
+        Cupon::factory()->count(100)->create();
         Sucursal::factory()->count(10)->create();
         for ($i=1; $i < 4; $i++) { 
             $sucursal = Sucursal::find($i);
@@ -51,6 +51,20 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
-        Entrada::factory()->count(10)->create();
+        $entrada = Entrada::factory()->create();
+        $entrada->productos()->attach(1, ['costo'=>10,'cantidad'=>2]);
+        $sucursal = $entrada->sucursal;
+        $sucursal->productos()->attach(1, ['cantidad'=>2]);
+        
+        // for($i = 1;$i<4; $i++){
+        //     $sucursal = Sucursal::find($i);
+        //     for($j = 1; $j<4; $j++){
+        //         $producto = Producto::find($j);
+        //         $sucursal->productos()->syncWithoutDetaching([$producto->id => [
+        //             'cantidad' => 2,
+        //         ]]);
+
+        //     }
+        // }
     }
 }

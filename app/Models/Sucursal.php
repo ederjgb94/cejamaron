@@ -22,4 +22,13 @@ class Sucursal extends Model
     public function usuarios(){
         return $this->belongsToMany(Usuario::class)->withTimestamps();
     }
+
+    public function productos(){
+        return $this->belongsToMany(Producto::class)->withTimestamps()
+        ->withPivot(['cantidad']);
+    }
+
+    public function entradas(){
+        return $this->hasMany(Entrada::class);
+    }
 }

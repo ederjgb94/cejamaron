@@ -13,7 +13,7 @@ class Entrada extends Model
         'folio_factura',
         'total_factura',
         'fecha_factura',
-        'usuario_id',
+        'usuario_id',                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
         'sucursal_id',
     ];
 
@@ -23,5 +23,10 @@ class Entrada extends Model
 
     public function sucursal(){
         return $this->belongsTo(Sucursal::class);
+    }
+
+    public function productos(){
+        return $this->belongsToMany(Producto::class)->withTimestamps()
+        ->withPivot(['costo','cantidad']);
     }
 }

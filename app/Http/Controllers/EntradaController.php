@@ -29,9 +29,28 @@ class EntradaController extends Controller
      */
     public function store(Request $request)
     {
-        Entrada::create($request->all());
+        $entrada = Entrada::create($request->all());
         $entrada_productos = $request['entrada_productos'];
-        
+        // $entrada->productos()->syncWithoutDetaching($entrada_productos);
+        // $entrada->sucursal->productos()->syncWithoutDetaching($entrada_productos->all());
+        foreach ($entrada_productos as $producto) {
+            $entrada->productos()->syncWithoutDetaching([
+                $producto['id'] => [
+                    'cantidad' => $producto['cantidad'],
+                    'costo' => $producto['costo']
+                ]
+            ]);
+            $sucursal = $entrada->sucursal;
+            
+            $existencia = $sucursal->productos->contains('id',$producto['id'])?
+             $sucursal->productos->find($producto['id'])->cantidad:0;
+            
+            $sucursal->productos()->syncWithoutDetaching([
+                $producto['id'] => [
+                    'cantidad' => $producto['cantidad']+$existencia,
+                ]
+            ]);
+        }
         return jsend_success();
     }
 

@@ -75,5 +75,9 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::match(['put','patch'],'ventas/{venta}','VentaController@update')->name('ventas.update');
     Route::post('ventas/{venta}', 'VentaController@cancelacion')->name('ventas.cancelacion');
     
+    Route::get('sucursales/{sucursal}/productos', 'ProductoSucursalController@index')->name('sucursales.productos.index');
+    Route::post('sucursales/{sucursal}/productos/{producto}','ProductoSucursalController@store')->name('sucursales.productos.store');
+    Route::get('sucursales/{sucursal}/productos/{producto}','ProductoSucursalController@show')->name('sucursales.productos.show');
 
+    Route::post('entradas/','EntradaController@store')->name('entradas.store');
 });
