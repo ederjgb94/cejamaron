@@ -41,13 +41,13 @@ class EntradaController extends Controller
                 ]
             ]);
             $sucursal = $entrada->sucursal;
-            
-            $existencia = $sucursal->productos->contains('id',$producto['id'])?
-             $sucursal->productos->find($producto['id'])->cantidad:0;
-            
+
+            $existencia = $sucursal->productos->contains('id', $producto['id']) ?
+                $sucursal->productos->find($producto['id'])->cantidad : 0;
+
             $sucursal->productos()->syncWithoutDetaching([
                 $producto['id'] => [
-                    'cantidad' => $producto['cantidad']+$existencia,
+                    'cantidad' => $producto['cantidad'] + $existencia,
                 ]
             ]);
         }
@@ -86,5 +86,16 @@ class EntradaController extends Controller
     public function destroy(Entrada $entrada)
     {
         //
+    }
+
+
+    public function sincronizar(Request $request)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $Entrada =  Entrada::where('updated_at', '>', $fecha_de_actualizacion)->get();
+
+        return jsend_success([
+            'Entrada' => $Entrada,
+        ],);
     }
 }

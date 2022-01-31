@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
         Producto::factory()->count(4000)->create();
         Cupon::factory()->count(100)->create();
         Sucursal::factory()->count(10)->create();
-        for ($i=1; $i < 4; $i++) { 
+        for ($i = 1; $i < 4; $i++) {
             $sucursal = Sucursal::find($i);
-            for ($j=1; $j < 4; $j++) {
+            for ($j = 1; $j < 4; $j++) {
                 $usuario = Usuario::find($j);
                 $sucursal->usuarios()->attach($usuario);
             }
@@ -41,21 +41,26 @@ class DatabaseSeeder extends Seeder
         $usuario_root->clave = '123';
         $usuario_root->save();
 
-        for ($i=0; $i < 4; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $venta = Venta::factory()->create();
-            for ($j=1; $j <= 3; $j++) {
+            for ($j = 1; $j <= 3; $j++) {
                 $producto = Producto::find($j);
                 $venta->productos()->attach($producto, [
-                    'cantidad'=>random_int(1,10),
-                    'precio_venta'=>$producto->menudeo,
+                    'cantidad' => random_int(1, 10),
+                    'precio_venta' => $producto->menudeo,
                 ]);
             }
         }
         $entrada = Entrada::factory()->create();
-        $entrada->productos()->attach(1, ['costo'=>10,'cantidad'=>2]);
+        $entrada->productos()->attach(1, ['costo' => 10, 'cantidad' => 2]);
         $sucursal = $entrada->sucursal;
-        $sucursal->productos()->attach(1, ['cantidad'=>2]);
-        
+        $sucursal->productos()->attach(1, ['cantidad' => 2]);
+
+        $entrada = Entrada::factory()->create();
+        $entrada->productos()->attach(2, ['costo' => 3, 'cantidad' => 33]);
+        $sucursal = $entrada->sucursal;
+        $sucursal->productos()->attach(2, ['cantidad' => 33]);
+
         // for($i = 1;$i<4; $i++){
         //     $sucursal = Sucursal::find($i);
         //     for($j = 1; $j<4; $j++){

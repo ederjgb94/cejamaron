@@ -90,4 +90,12 @@ class SucursalController extends Controller
             'sucursales' => $sucursales,
         ],);
     }
+
+    // public function sincronizar_existencias(Request $request)
+    // {
+    //     $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+    //     $sucursales = Sucursal::orderBy('id', 'DESC')->with('producto.sucursal')->get(['id',]);
+
+    //     return $sucursales;
+    // }
 }
