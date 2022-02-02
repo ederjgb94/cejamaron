@@ -15,7 +15,7 @@ class SucursalUsuarioController extends Controller
      */
     public function index(Sucursal $sucursal)
     {
-        $paginador = $sucursal->usuarios()->orderBy('nombre','asc')->paginate(10);
+        $paginador = $sucursal->usuarios()->orderBy('nombre', 'asc')->paginate(10);
         return jsend_success([
             'paginas' => $paginador->lastPage(),
             'sucursales' =>  $paginador->items(),
@@ -48,5 +48,18 @@ class SucursalUsuarioController extends Controller
         return jsend_success();
     }
 
-    
+    public function sincronizar_existencias(Request $request, Usuario $usuario)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $sucursales = $usuario->sucursals()->get();
+        $salida = [];
+        foreach ($sucursales as $sucursal) {
+            $sucursal = Sucursal::find($sucursal->id);
+            $productos = $sucursal->productos;
+            array_push($salida, $productos->pluck('pivot'));
+        }
+        return jsend_success([
+            "existencias" => $salida,
+        ]);
+    }
 }

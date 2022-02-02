@@ -23,7 +23,7 @@ class Producto extends Model
     ];
 
     protected $hidden = [
-        'pivot'
+         'pivot'
     ];
 
     public function medida()

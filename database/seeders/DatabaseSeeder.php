@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Usuario::factory()->count(1000)->create();
-        Medida::factory()->count(100)->create();
-        Categoria::factory()->count(100)->create();
-        Producto::factory()->count(4000)->create();
-        Cupon::factory()->count(100)->create();
+        Usuario::factory()->count(10)->create();
+        Medida::factory()->count(10)->create();
+        Categoria::factory()->count(10)->create();
+        Producto::factory()->count(100)->create();
+        Cupon::factory()->count(10)->create();
         Sucursal::factory()->count(10)->create();
         for ($i = 1; $i < 4; $i++) {
             $sucursal = Sucursal::find($i);
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             }
         }
         $usuario_root = Usuario::find(1);
-        $usuario_root->es_raiz = true;
+        $usuario_root->es_raiz = 0;
         $usuario_root->usuario = 'admin';
         $usuario_root->clave = '123';
         $usuario_root->save();
@@ -60,6 +60,8 @@ class DatabaseSeeder extends Seeder
         $entrada->productos()->attach(2, ['costo' => 3, 'cantidad' => 33]);
         $sucursal = $entrada->sucursal;
         $sucursal->productos()->attach(2, ['cantidad' => 33]);
+        $sucursal->productos()->attach(4, ['cantidad' => 12]);
+        $sucursal->productos()->attach(3, ['cantidad' => 55]);
 
         // for($i = 1;$i<4; $i++){
         //     $sucursal = Sucursal::find($i);

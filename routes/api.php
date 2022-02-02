@@ -65,10 +65,13 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::match(['put', 'patch'], 'sucursales/{sucursal}', 'SucursalController@update')->name('sucursales.update');
     Route::get('sucursales/{sucursal}', 'SucursalController@show')->name('sucursales.show');
     Route::post('sucursales/sincronizar', 'SucursalController@sincronizar')->name('sucursales.sincronizar');
+    Route::post('sucursales/activar/{sucursal}', 'SucursalController@activar')->name('sucursales.activar');
+    Route::post('sucursales/desactivar/{sucursal}', 'SucursalController@desactivar')->name('sucursales.desactivar');
 
     Route::get('sucursales/{sucursal}/usuarios', 'SucursalUsuarioController@index')->name('sucursales.usuarios.index');
     Route::post('sucursales/{sucursal}/usuarios/{usuario}', 'SucursalUsuarioController@store')->name('sucursales.usuarios.store');
     Route::delete('sucursales/{sucursal}/usuarios/{usuario}', 'SucursalUsuarioController@destroy')->name('sucursales.usuarios.destroy');
+    Route::post('usuarios/{usuario}/sincronizar_existencias','SucursalUsuarioController@sincronizar_existencias')->name('usuarios.sincronizar_existencias');
 
     Route::get('ventas', 'VentaController@index')->name('ventas.index');
     Route::post('ventas', 'VentaController@store')->name('ventas.store');
@@ -78,7 +81,7 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::get('sucursales/{sucursal}/productos', 'ProductoSucursalController@index')->name('sucursales.productos.index');
     Route::post('sucursales/{sucursal}/productos/{producto}', 'ProductoSucursalController@store')->name('sucursales.productos.store');
     Route::get('sucursales/{sucursal}/productos/{producto}', 'ProductoSucursalController@show')->name('sucursales.productos.show');
-    Route::post('sucursales/sincronizar_existencias', 'SucursalController@sincronizar_existencias')->name('sucursales.sincronizar_existencias');
+    // Route::post('sucursales/sincronizar_existencias', 'SucursalController@sincronizar_existencias')->name('sucursales.sincronizar_existencias');
 
     Route::post('entradas/', 'EntradaController@store')->name('entradas.store');
     Route::post('entradas/sincronizar', 'EntradaController@sincronizar')->name('entradas.sincronizar');

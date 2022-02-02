@@ -70,6 +70,7 @@ class SucursalController extends Controller
     public function activar(ActivoRequest $request, Sucursal $sucursal)
     {
         $sucursal->activo = true;
+        $sucursal->save();
         $this->sincronizarFirebase();
         return jsend_success();
     }
@@ -77,6 +78,7 @@ class SucursalController extends Controller
     public function desactivar(ActivoRequest $request, Sucursal $sucursal)
     {
         $sucursal->activo = false;
+        $sucursal->save();
         $this->sincronizarFirebase();
         return jsend_success();
     }
@@ -90,12 +92,4 @@ class SucursalController extends Controller
             'sucursales' => $sucursales,
         ],);
     }
-
-    // public function sincronizar_existencias(Request $request)
-    // {
-    //     $fecha_de_actualizacion = $request->fecha_de_actualizacion;
-    //     $sucursales = Sucursal::orderBy('id', 'DESC')->with('producto.sucursal')->get(['id',]);
-
-    //     return $sucursales;
-    // }
 }

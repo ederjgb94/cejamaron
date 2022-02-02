@@ -14,7 +14,8 @@ class Usuario extends Model
         'telefono',
         'usuario',
         'clave',
-        'activo'
+        'activo',
+        'es_raiz'
     ];
 
     public function sucursals(){
