@@ -20,6 +20,7 @@ class SucursalFactory extends Factory
             'puerta_enlace3'=>Str::random(5),
             'puerta_enlace4'=>Str::random(5),
             'codigo_remoto'=>strtoupper(Str::random(4)),
+            'direccion'=>$this->faker->streetAddress(),
             'razon_social'=>$this->faker->name(),
             'correo'=>$this->faker->unique()->safeEmail(),
         ];

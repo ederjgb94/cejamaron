@@ -50,8 +50,9 @@ class SucursalUsuarioController extends Controller
 
     public function sincronizar_existencias(Request $request, Usuario $usuario)
     {
+        //**MODIFICAR PARA ULTIMA ACTUALIZACION */
         $fecha_de_actualizacion = $request->fecha_de_actualizacion;
-        $sucursales = $usuario->sucursals()->get();
+        $sucursales = $usuario->sucursals;
         $salida = [];
         foreach ($sucursales as $sucursal) {
             $sucursal = Sucursal::find($sucursal->id);

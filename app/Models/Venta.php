@@ -12,6 +12,7 @@ class Venta extends Model
     protected $fillable = [
         'total',
         'folio',
+        'folio_corte',
         'fecha_venta',
         'metodo_pago',
         'tipo',

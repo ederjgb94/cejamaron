@@ -22,6 +22,7 @@ class CreateSucursalsTable extends Migration
             $table->string('puerta_enlace4')->nullable();
             $table->string('codigo_remoto');
             $table->string('razon_social');
+            $table->string('direccion');
             $table->string('correo');
             $table->boolean('activo')->default(true);
             $table->timestamps();

@@ -18,7 +18,11 @@ class VentaFactory extends Factory
             'total' => $this->faker->randomFloat(2, 10, 1000),
             'folio' => Str::random(17),
             'fecha_venta' => $this->faker->date(),
-            'metodo_pago' => random_int(1, 3),
+            'metodo_pago' => json_encode( [
+                ['debito'=>40.10],
+
+                    ['debito'=>40.10],
+            ]),
             'sucursal_id' => random_int(1, 3),
             'tipo' => random_int(1, 3),
         ];

@@ -20,6 +20,7 @@ class CreateEntradasTable extends Migration
             $table->date('fecha_factura');
             $table->foreignId('usuario_id')->constrained();
             $table->foreignId('sucursal_id')->constrained();
+            $table->foreignId('proveedor_id')->nullable()->constrained();
             $table->boolean('cancelacion')->default(false);
             $table->timestamps();
         });

@@ -12,6 +12,9 @@ use App\models\Cupon;
 use App\Models\Entrada;
 use App\Models\Sucursal;
 use App\Models\Venta;
+use App\Models\Proveedor;
+use App\Models\Corte;
+use App\Models\CuentaBancaria;
 
 class DatabaseSeeder extends Seeder
 {
@@ -61,17 +64,9 @@ class DatabaseSeeder extends Seeder
         $sucursal = $entrada->sucursal;
         $sucursal->productos()->attach(2, ['cantidad' => 33]);
         $sucursal->productos()->attach(4, ['cantidad' => 12]);
-        $sucursal->productos()->attach(3, ['cantidad' => 55]);
+        $sucursal->productos()->attach(5, ['cantidad' => 55]);
 
-        // for($i = 1;$i<4; $i++){
-        //     $sucursal = Sucursal::find($i);
-        //     for($j = 1; $j<4; $j++){
-        //         $producto = Producto::find($j);
-        //         $sucursal->productos()->syncWithoutDetaching([$producto->id => [
-        //             'cantidad' => 2,
-        //         ]]);
-
-        //     }
-        // }
+        Proveedor::factory(10)->create();
+        CuentaBancaria::factory(3)->create();
     }
 }

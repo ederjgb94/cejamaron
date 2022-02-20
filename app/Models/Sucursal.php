@@ -16,8 +16,13 @@ class Sucursal extends Model
         'puerta_enlace4',
         'codigo_remoto',
         'razon_social',
+        'direccion',
         'correo',
     ];
+
+    protected $hidden = [
+        'pivot'
+   ];
 
     public function usuarios(){
         return $this->belongsToMany(Usuario::class)->withTimestamps();
@@ -30,5 +35,9 @@ class Sucursal extends Model
 
     public function entradas(){
         return $this->hasMany(Entrada::class);
+    }
+
+    public function cortes(){
+        return $this->hasMany(Cortes::class);
     }
 }

@@ -15,6 +15,7 @@ class Entrada extends Model
         'fecha_factura',
         'usuario_id',                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
         'sucursal_id',
+        'proveedor_id',
     ];
 
     public function usuario(){
@@ -28,5 +29,9 @@ class Entrada extends Model
     public function productos(){
         return $this->belongsToMany(Producto::class)->withTimestamps()
         ->withPivot(['costo','cantidad']);
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class);
     }
 }
