@@ -29,8 +29,18 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        Cliente::create($request->all());
-        return jsend_success();
+        $cliente = Cliente::where('rfc', '=', $request->rfc)->first();
+        if ($cliente == null) {
+            Cliente::create($request->all());
+        } else {
+            $cliente->update($request->all());
+        }
+        return view('');
+    }
+
+    public function create()
+    {
+        return view('cliente_facturacion');
     }
 
     /**
@@ -42,7 +52,7 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         return jsend_success(
-            ['cliente'=>$cliente],
+            ['cliente' => $cliente],
         );
     }
 
@@ -59,4 +69,16 @@ class ClienteController extends Controller
         return jsend_success();
     }
 
+    public function buscar_rfc(Request $request)
+    {
+        $cliente =  Cliente::where('rfc', '=', $request->rfc)->first();
+
+        if ($cliente == null) {
+            return view('cliente_facturacion', [
+                'rfc' => $request->rfc,
+            ]);
+        } else {
+            return view('cliente_facturacion', $cliente);
+        }
+    }
 }
