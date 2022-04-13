@@ -15,7 +15,10 @@ class CreateClienteFacturasTable extends Migration
     {
         Schema::create('cliente_facturas', function (Blueprint $table) {
             $table->id();
-            $table->json('datoscliente');
+            $table->foreignId('venta_id')->unique()->constrained();
+            $table->foreignId('cliente_id')->constrained();
+            $table->string('uso_factura');
+            $table->json('metodo_pago');
             $table->timestamps();
         });
     }

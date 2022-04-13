@@ -9,7 +9,15 @@ class ClienteFactura extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'datoscliente'
-    ];
+    protected $fillable = [];
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
+
+    public function venta()
+    {
+        return $this->belongsTo(Venta::class);
+    }
 }

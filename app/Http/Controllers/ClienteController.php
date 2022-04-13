@@ -31,11 +31,14 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::where('rfc', '=', $request->rfc)->first();
         if ($cliente == null) {
-            Cliente::create($request->all());
+            $cliente = Cliente::create($request->all());
         } else {
             $cliente->update($request->all());
         }
-        return view('');
+
+        return view('finalizar_facturacion', [
+            'cliente' => $cliente,
+        ]);
     }
 
     public function create()

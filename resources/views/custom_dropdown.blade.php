@@ -2,9 +2,9 @@
     <label class="col-sm-3 fw-bold col-form-label">{{ $label }}</label>
     <div class="col-sm-9">
         <select required name="{{ $name }}" class="form-select" id="floatingSelectGrid">
-            <option value="" disabled selected>--</option>
+            <option value="" disabled selected}>--</option>
             @for ($i = 0; $i < count($options); $i++)
-                <option value="{{ $i }}">
+                <option {{ $selected == $options[$i] ? 'selected' : '' }} value="{{ $options[$i] }}">
                     {{ $options[$i] }}
                 </option>
             @endfor

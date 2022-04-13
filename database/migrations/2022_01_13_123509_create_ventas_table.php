@@ -17,10 +17,10 @@ class CreateVentasTable extends Migration
             $table->id();
             $table->decimal('total');
             $table->string('folio');
-            $table->string('folio_corte')->nullable();//ATENDER!!!
-            $table->date('fecha_venta');
+            $table->string('folio_corte')->nullable(); //ATENDER!!!
+            $table->dateTime('fecha_venta');
             $table->json('metodo_pago'); //Efectivo,Credito,Debito,Cheque,Transferencia
-            $table->integer('tipo');//[1]Normal [2]Vendedor [3]Especial,
+            $table->integer('tipo'); //[1]Normal [2]Vendedor [3]Especial,
             $table->foreignId('sucursal_id')->constrained()->onDelete('cascade');
             $table->foreignId('usuario_id')->nullable()->constrained();
             $table->boolean('cancelacion')->default(false);

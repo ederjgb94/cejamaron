@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClienteFactura;
+use App\Models\Cliente;
+use App\Models\Venta;
+
 use Illuminate\Http\Request;
 
 class ClienteFacturaController extends Controller
@@ -24,7 +27,7 @@ class ClienteFacturaController extends Controller
      */
     public function create()
     {
-        return '';
+        // return view('finalizar_facturacion');
     }
 
     /**
@@ -35,8 +38,61 @@ class ClienteFacturaController extends Controller
      */
     public function store(Request $request)
     {
-        // ClienteFactura::create($request);
-        return $request;
+        if (
+            $request->efectivo == null &&
+            $request->debito == null &&
+            $request->credito == null &&
+            $request->cheque == null &&
+            $request->transferencia == null
+        ) {
+            return view('finalizar_facturacion', [
+                'error_metodo_pago' => 'Método de pago es requerido',
+                'folio' => $request->folio,
+                'uso_factura' => $request->uso_factura,
+                'rfc' => $request->rfc,
+                'razon_social' => $request->razon_social,
+
+            ]);
+        }
+
+        $cliente = Cliente::where('rfc', '=', $request->rfc)->first();
+        $venta = Venta::where('folio', '=', $request->folio)->first();
+
+        if ($venta == null) {
+            return view('finalizar_facturacion', [
+                'folio' => $request->folio,
+                'uso_factura' => $request->uso_factura,
+                'rfc' => $request->rfc,
+                'razon_social' => $request->razon_social,
+                'error_folio' => 'La venta no existe',
+                'invalid_folio' => 'is-invalid',
+            ]);
+        }
+        $factura_aux = ClienteFactura::where('venta_id', '=', $venta->id)->first();
+
+        if ($factura_aux != null) {
+            return view('finalizar_facturacion', [
+                'folio' => $request->folio,
+                'uso_factura' => $request->uso_factura,
+                'rfc' => $request->rfc,
+                'razon_social' => $request->razon_social,
+                'error_folio' => 'El folio en proceso de facturación',
+                'invalid_folio' => 'is-invalid',
+            ]);
+        }
+
+        $cliente_factura = new ClienteFactura();
+        $cliente_factura->uso_factura = $request->uso_factura;
+        $cliente_factura->metodo_pago = json_encode([
+            'efectivo' => $request->efectivo == null ? 'false' : 'true',
+            'debito' => $request->debito == null ? 'false' : 'true',
+            'credito' => $request->credito == null ? 'false' : 'true',
+            'cheque' => $request->cheque == null ? 'false' : 'true',
+            'transferencia' => $request->transferencia == null ? 'false' : 'true',
+        ]);
+        $cliente_factura->cliente()->associate($cliente);
+        $cliente_factura->venta()->associate($venta);
+        $cliente_factura->save();
     }
 
     /**

@@ -35,8 +35,10 @@ Route::get('/', function () {
 });
 
 
-Route::get('clientes', 'ClienteController@create')->name('clientes.create');
+// Route::get('clientes', 'ClienteController@create')->name('clientes.create');
 Route::post('clientes', 'ClienteController@store')->name('clientes.store');
 
 Route::view('facturacion', 'facturacion')->name('facturacion.view');
 Route::post('cliente_facturacion', 'ClienteController@buscar_rfc')->name('buscar_rfc');
+
+Route::post('facturacion', 'ClienteFacturaController@store')->name('clientes.facturas.store');
