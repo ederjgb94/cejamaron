@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         $usuario_root->clave = '123';
         $usuario_root->save();
 
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 8; $i++) {
             $venta = Venta::factory()->create();
             for ($j = 1; $j <= 3; $j++) {
                 $producto = Producto::find($j);

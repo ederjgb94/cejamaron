@@ -93,6 +93,10 @@ class ClienteFacturaController extends Controller
         $cliente_factura->cliente()->associate($cliente);
         $cliente_factura->venta()->associate($venta);
         $cliente_factura->save();
+        return view('gracias_facturacion', [
+            'rfc' => $cliente->rfc,
+            'folio' => $venta->folio,
+        ]);
     }
 
     /**

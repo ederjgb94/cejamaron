@@ -42,3 +42,5 @@ Route::view('facturacion', 'facturacion')->name('facturacion.view');
 Route::post('cliente_facturacion', 'ClienteController@buscar_rfc')->name('buscar_rfc');
 
 Route::post('facturacion', 'ClienteFacturaController@store')->name('clientes.facturas.store');
+
+// Route::view('test', 'gracias_facturacion');
