@@ -23,6 +23,7 @@ class Apartado extends Model
         'dias_maximo',
         'folio',
         'fecha_entrega',
+        'sucursal_id',
         'estado',
     ];
 }

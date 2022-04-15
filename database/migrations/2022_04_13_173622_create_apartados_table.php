@@ -30,6 +30,7 @@ class CreateApartadosTable extends Migration
             $table->integer('dias_maximo');
             $table->string('folio');
             $table->dateTime('fecha_entrega');
+            $table->foreignId('sucursal_id')->nullable()->constrained();
             $table->integer('estado')->default(0); //0 pendiente, 1 entregado, 2 cancelado, 3 expiró
             $table->timestamps();
         });
