@@ -22,7 +22,6 @@ class CreateApartadosTable extends Migration
             $table->foreign('id_cajero_registro')->references('id')->on('usuarios');
             $table->unsignedBigInteger('id_cajero_entrega');
             $table->foreign('id_cajero_entrega')->references('id')->on('usuarios');
-
             $table->json('productos');
             $table->decimal('total');
             $table->decimal('total_pagado');
