@@ -16,8 +16,8 @@ class CreateVentasTable extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->decimal('total');
-            $table->string('folio');
-            $table->string('folio_corte')->nullable(); //ATENDER!!!
+            $table->string('folio')->unique();
+            $table->string('folio_corte');
             $table->dateTime('fecha_venta');
             $table->json('metodo_pago'); //Efectivo,Credito,Debito,Cheque,Transferencia
             $table->integer('tipo'); //[1]Normal [2]Vendedor [3]Especial,

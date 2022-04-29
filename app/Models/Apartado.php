@@ -10,9 +10,7 @@ class Apartado extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
-        'telefono',
-        'correo',
+        'cliente_creditos_id',
         'id_cajero_registro',
         'id_cajero_entrega',
         'productos',
@@ -20,10 +18,10 @@ class Apartado extends Model
         'total_pagado',
         'metodo_pago',
         'fecha_de_apartado',
-        'dias_maximo',
         'folio',
         'fecha_entrega',
         'sucursal_id',
         'estado',
+        'observaciones'
     ];
 }

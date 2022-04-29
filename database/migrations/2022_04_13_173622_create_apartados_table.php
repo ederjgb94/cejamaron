@@ -15,23 +15,21 @@ class CreateApartadosTable extends Migration
     {
         Schema::create('apartados', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('telefono');
-            $table->string('correo');
+            $table->foreignId('cliente_creditos_id')->constrained();
             $table->unsignedBigInteger('id_cajero_registro');
             $table->foreign('id_cajero_registro')->references('id')->on('usuarios');
-            $table->unsignedBigInteger('id_cajero_entrega');
+            $table->unsignedBigInteger('id_cajero_entrega')->nullable();
             $table->foreign('id_cajero_entrega')->references('id')->on('usuarios');
             $table->json('productos');
             $table->decimal('total');
             $table->decimal('total_pagado');
             $table->json('metodo_pago');
             $table->dateTime('fecha_de_apartado');
-            $table->integer('dias_maximo');
-            $table->string('folio');
-            $table->dateTime('fecha_entrega');
+            $table->string('folio')->unique();
+            $table->dateTime('fecha_entrega')->nullable();
             $table->foreignId('sucursal_id')->nullable()->constrained();
             $table->integer('estado')->default(0); //0 pendiente, 1 entregado, 2 cancelado, 3 expiró
+            $table->string('observaciones')->nullable();
             $table->timestamps();
         });
     }

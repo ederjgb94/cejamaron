@@ -71,7 +71,7 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::get('sucursales/{sucursal}/usuarios', 'SucursalUsuarioController@index')->name('sucursales.usuarios.index');
     Route::post('sucursales/{sucursal}/usuarios/{usuario}', 'SucursalUsuarioController@store')->name('sucursales.usuarios.store');
     Route::delete('sucursales/{sucursal}/usuarios/{usuario}', 'SucursalUsuarioController@destroy')->name('sucursales.usuarios.destroy');
-    Route::post('usuarios/{usuario}/sincronizar_existencias','SucursalUsuarioController@sincronizar_existencias')->name('usuarios.sincronizar_existencias');
+    Route::post('usuarios/{usuario}/sincronizar_existencias', 'SucursalUsuarioController@sincronizar_existencias')->name('usuarios.sincronizar_existencias');
 
     Route::get('ventas', 'VentaController@index')->name('ventas.index');
     Route::post('ventas', 'VentaController@store')->name('ventas.store');
@@ -87,21 +87,35 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::post('entradas', 'EntradaController@store')->name('entradas.store');
     Route::post('entradas/sincronizar', 'EntradaController@sincronizar')->name('entradas.sincronizar');
 
-    Route::get('proveedores','ProveedorController@index')->name('proveedor.index');
-    Route::post('proveedores','ProveedorController@store')->name('proveedor.store');
+    Route::get('proveedores', 'ProveedorController@index')->name('proveedor.index');
+    Route::post('proveedores', 'ProveedorController@store')->name('proveedor.store');
     Route::get('proveedores/{proveedor}', 'ProveedorController@show')->name('proveedor.show');
-    Route::match(['put','patch'],'proveedores/{proveedor}','ProveedorController@update')->name('proveedor.update');
-    Route::post('proveedores/{proveedor}/agregar_cuenta_bancaria','ProveedorController@agregar_cuenta_bancaria')->name('proveedor.agregar_cuenta_bancaria');
+    Route::match(['put', 'patch'], 'proveedores/{proveedor}', 'ProveedorController@update')->name('proveedor.update');
+    Route::post('proveedores/{proveedor}/agregar_cuenta_bancaria', 'ProveedorController@agregar_cuenta_bancaria')->name('proveedor.agregar_cuenta_bancaria');
 
-    Route::get('cuentas_bancarias','CuentaBancariaController@index')->name('cuentas_bancarias.index');
-    Route::get('cuentas_bancarias/{cuentaBancaria}','CuentaBancariaController@show')->name('cuentas_bancarias.show');
-    Route::match(['put','patch'],'cuentas_bancarias/{cuentaBancaria}','CuentaBancariaController@update')->name('cuentas_bancarias.update');
-    Route::delete('cuentas_bancarias/{cuentaBancaria}','CuentaBancariaController@destroy')->name('cuentas_bancarias.destroy');
+    Route::get('cuentas_bancarias', 'CuentaBancariaController@index')->name('cuentas_bancarias.index');
+    Route::get('cuentas_bancarias/{cuentaBancaria}', 'CuentaBancariaController@show')->name('cuentas_bancarias.show');
+    Route::match(['put', 'patch'], 'cuentas_bancarias/{cuentaBancaria}', 'CuentaBancariaController@update')->name('cuentas_bancarias.update');
+    Route::delete('cuentas_bancarias/{cuentaBancaria}', 'CuentaBancariaController@destroy')->name('cuentas_bancarias.destroy');
 
-    Route::get('cortes','CorteController@index')->name('cortes.index');
-    Route::post('cortes','CorteController@store')->name('cortes.store');
-    Route::get('cortes/{corte}','CorteController@show')->name('cortes.show');
-    Route::match(['put','patch'],'CorteController@update')->name('cortes.update');
-    
-    
+    Route::get('cortes', 'CorteController@index')->name('cortes.index');
+    Route::post('cortes', 'CorteController@store')->name('cortes.store');
+    Route::get('cortes/{corte}', 'CorteController@show')->name('cortes.show');
+    Route::match(['put', 'patch'], 'CorteController@update')->name('cortes.update');
+
+
+
+
+    Route::apiResource('apartados', 'ApartadoController');
+    Route::post('apartados/sincronizar', 'ApartadoController@sincronizar')->name('apartados.sincronizar');
+
+    Route::apiResource('creditos', 'CreditoController');
+    Route::post('creditos/sincronizar', 'CreditoController@sincronizar')->name('creditos.sincronizar');
+
+    Route::get('clientes_creditos', 'ClienteCreditoController@index')->name('clientes_creditos.index');
+    Route::post('clientes_creditos', 'ClienteCreditoController@store')->name('clientes_creditos.store');
+    Route::get('clientes_creditos/{clienteCredito}', 'ClienteCreditoController@show')->name('clientes_creditos.show');
+    Route::match(['put', 'patch'], 'clientes_creditos/{clienteCredito}', 'ClienteCreditoController@update')->name('clientes_creditos.update');
+    Route::delete('clientes_creditos/{clienteCredito}', 'ClienteCreditoController@destroy')->name('clientes_creditos.destroy');
+    Route::post('clientes_creditos/sincronizar', 'ClienteCreditoController@sincronizar')->name('clientes_creditos.sincronizar');
 });

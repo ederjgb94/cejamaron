@@ -15,7 +15,7 @@ class CreateMedidasTable extends Migration
     {
         Schema::create('medidas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre')->unique();
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });

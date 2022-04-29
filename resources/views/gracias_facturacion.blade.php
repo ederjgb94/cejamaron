@@ -11,7 +11,7 @@
         </p>
         <div style="width: 200px" class="align-self-center">
 
-            <a href="/facturacion" class="btn btn-danger fw-light">Inicio</a>
+            <a href="{{ route('facturacion.view') }}" class="btn btn-danger fw-light">Inicio</a>
         </div>
     </div>
 @endsection

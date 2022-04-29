@@ -66,4 +66,16 @@ class CreditoController extends Controller
     {
         //
     }
+
+    public function sincronizar(Request $request)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $creditos =  Credito::where('updated_at', '>', $fecha_de_actualizacion)
+            ->where('sucursal_id', $request->sucursal_id)
+            ->get();
+
+        return jsend_success([
+            'creditos' => $creditos,
+        ],);
+    }
 }

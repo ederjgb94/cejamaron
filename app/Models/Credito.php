@@ -11,11 +11,15 @@ class Credito extends Model
 
     protected $fillable = [
         'cliente_creditos_id',
-        'descripcion',
-        'fecha_inicio',
-        'cantidad_meses',
-        'total_credito',
-        'venta_id',
+        'id_cajero_registro',
+        'productos',
+        'total',
+        'total_pagado',
+        'metodo_pago',
+        'fecha_de_credito',
+        'folio',
         'sucursal_id',
+        'estado',
+        'observaciones',
     ];
 }

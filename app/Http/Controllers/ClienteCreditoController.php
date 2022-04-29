@@ -29,8 +29,12 @@ class ClienteCreditoController extends Controller
      */
     public function store(Request $request)
     {
-        ClienteCredito::create($request->all());
-        return jsend_success();
+        $cliente = ClienteCredito::create($request->all());
+        return jsend_success(
+            [
+                'cliente_creditos_id' => $cliente->id,
+            ]
+        );
     }
 
     /**
@@ -68,5 +72,15 @@ class ClienteCreditoController extends Controller
     public function destroy(ClienteCredito $clienteCredito)
     {
         //
+    }
+
+    public function sincronizar(Request $request)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $clientes_credito =  ClienteCredito::where('updated_at', '>', $fecha_de_actualizacion)->get();
+
+        return jsend_success([
+            'clientes_credito' => $clientes_credito,
+        ],);
     }
 }

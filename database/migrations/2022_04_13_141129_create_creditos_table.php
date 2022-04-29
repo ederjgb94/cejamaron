@@ -16,12 +16,17 @@ class CreateCreditosTable extends Migration
         Schema::create('creditos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cliente_creditos_id')->constrained();
-            $table->string('descripcion');
-            $table->dateTime('fecha_inicio');
-            $table->integer('cantidad_meses');
-            $table->decimal('total_credito');
-            $table->foreignId('venta_id')->constrained();
-            $table->foreignId('sucursal_id')->constrained();
+            $table->unsignedBigInteger('id_cajero_registro');
+            $table->foreign('id_cajero_registro')->references('id')->on('usuarios');
+            $table->json('productos');
+            $table->decimal('total');
+            $table->decimal('total_pagado');
+            $table->json('metodo_pago');
+            $table->dateTime('fecha_de_credito');
+            $table->string('folio')->unique();
+            $table->foreignId('sucursal_id')->nullable()->constrained();
+            $table->integer('estado')->default(0); //0 pendiente, 1 liquidado 2 cancelado
+            $table->string('observaciones')->nullable();
             $table->timestamps();
         });
     }
