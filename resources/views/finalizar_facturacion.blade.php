@@ -51,7 +51,20 @@
                 'name' => 'uso_factura',
                 'label' => 'Uso Factura:',
                 'selected' => $uso_factura ?? '',
-                'options' => ['ADQ. MERCANCÍA', 'GASTOS GENERALES', 'POR DEFINIR'],
+                'options' => [
+                    'ADQUISICIÓN DE MERCANCIAS',
+                    'DEVOLUCIONES DESCUENTOS O BONIFICACIONES',
+                    'GASTOS EN GENERAL',
+                    'CONSTRUCCIONES',
+                    'MOBILARIO Y EQUIPO DE OFICINA PARA INVERSIONES',
+                    'EQUIPO DE TRANSPORTE',
+                    'EQUIPO DE COMPUTO Y ACCESORIOS',
+                    'DADOS, TROQUELES, MOLDES, MATRICES Y HERRAMENTAL',
+                    'COMUNICACIONES TELEFÓNICAS',
+                    'OTRA MAQUINARIA Y EQUIPO',
+                    'HONORARIOS MÉDICOS, DENTALES Y GASTOS HOSPITALARIOS',
+                    'GASTOS MÉDICOS CON INCAPACIDAD O DISCAPACIDAD',
+                ],
             ])
 
             <div class="row mb-2">
