@@ -22,7 +22,9 @@ class CreateCortesTable extends Migration
             $table->decimal('total_tarjetas_credito');
             $table->decimal('total_cheques');
             $table->decimal('total_transferencias');
-            $table->json('gastos');//[]
+            $table->decimal('efectivo_apartados');
+            $table->decimal('efectivo_creditos');
+            $table->json('gastos'); //[]
             $table->json('ingresos');
             $table->decimal('sobrante');
             $table->date('fecha_apertura_caja');

@@ -112,6 +112,9 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::apiResource('creditos', 'CreditoController');
     Route::post('creditos/sincronizar', 'CreditoController@sincronizar')->name('creditos.sincronizar');
 
+    // Route::apiResource('creditos', 'CreditoController');
+    // Route::post('creditos/sincronizar', 'CreditoController@sincronizar')->name('creditos.sincronizar');
+
     Route::get('clientes_creditos', 'ClienteCreditoController@index')->name('clientes_creditos.index');
     Route::post('clientes_creditos', 'ClienteCreditoController@store')->name('clientes_creditos.store');
     Route::get('clientes_creditos/{clienteCredito}', 'ClienteCreditoController@show')->name('clientes_creditos.show');

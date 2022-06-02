@@ -17,6 +17,8 @@ class Corte extends Model
         'total_tarjetas_credito',
         'total_cheques',
         'total_transferencias',
+        'efectivo_apartados',
+        'efectivo_creditos',
         'gastos',
         'ingresos',
         'sobrante',
@@ -26,7 +28,8 @@ class Corte extends Model
         'usuario_id',
     ];
 
-    public function sucursal(){
+    public function sucursal()
+    {
         return $this->belongsTo(Sucursal::class);
     }
 

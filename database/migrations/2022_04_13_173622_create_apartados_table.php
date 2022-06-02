@@ -28,7 +28,7 @@ class CreateApartadosTable extends Migration
             $table->string('folio')->unique();
             $table->dateTime('fecha_entrega')->nullable();
             $table->foreignId('sucursal_id')->nullable()->constrained();
-            $table->integer('estado')->default(0); //0 pendiente, 1 entregado, 2 cancelado, 3 expiró
+            $table->integer('estado')->default(0); //0 pendiente, 1 expiró, 2 cancelado, 3 pagado
             $table->string('observaciones')->nullable();
             $table->timestamps();
         });
