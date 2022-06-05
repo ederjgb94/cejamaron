@@ -22,4 +22,9 @@ class Credito extends Model
         'estado',
         'observaciones',
     ];
+
+    public function abonos()
+    {
+        return $this->hasMany(AbonoCredito::class);
+    }
 }

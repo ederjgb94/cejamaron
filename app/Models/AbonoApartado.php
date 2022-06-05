@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AbonoCredito extends Model
+class AbonoApartado extends Model
 {
     use HasFactory;
 
@@ -19,8 +19,8 @@ class AbonoCredito extends Model
         'usuario_id',
     ];
 
-    public function credito()
+    public function abonos()
     {
-        return $this->belongsTo(Credito::class);
+        return $this->belongsTo(Apartado::class);
     }
 }

@@ -112,8 +112,11 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::apiResource('creditos', 'CreditoController');
     Route::post('creditos/sincronizar', 'CreditoController@sincronizar')->name('creditos.sincronizar');
 
-    // Route::apiResource('creditos', 'CreditoController');
-    // Route::post('creditos/sincronizar', 'CreditoController@sincronizar')->name('creditos.sincronizar');
+    Route::apiResource('abonos_credito', 'AbonoCreditoController');
+    Route::post('abonos_credito/sincronizar', 'AbonoCreditoController@sincronizar')->name('abonos_credito.sincronizar');
+
+    Route::apiResource('abonos_apartado', 'AbonoApartadoController');
+    Route::post('abonos_apartado/sincronizar', 'AbonoApartadoController@sincronizar')->name('abonos_apartado.sincronizar');
 
     Route::get('clientes_creditos', 'ClienteCreditoController@index')->name('clientes_creditos.index');
     Route::post('clientes_creditos', 'ClienteCreditoController@store')->name('clientes_creditos.store');

@@ -24,4 +24,9 @@ class Apartado extends Model
         'estado',
         'observaciones'
     ];
+
+    public function abonos()
+    {
+        return $this->hasMany(AbonoApartado::class);
+    }
 }

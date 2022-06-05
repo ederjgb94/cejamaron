@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbonoCreditosTable extends Migration
+class CreateAbonoApartadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAbonoCreditosTable extends Migration
      */
     public function up()
     {
-        Schema::create('abono_creditos', function (Blueprint $table) {
+        Schema::create('abono_apartados', function (Blueprint $table) {
             $table->id();
             $table->string('folio')->unique();
             $table->json('metodo_pago');
@@ -33,6 +33,6 @@ class CreateAbonoCreditosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('abono_creditos');
+        Schema::dropIfExists('abono_apartados');
     }
 }

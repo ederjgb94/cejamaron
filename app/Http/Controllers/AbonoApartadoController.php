@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Credito;
+use App\Models\AbonoApartado;
 use Illuminate\Http\Request;
 
-class CreditoController extends Controller
+class AbonoApartadoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,10 @@ class CreditoController extends Controller
      */
     public function index()
     {
-        $paginador = Credito::orderBy('created_at', 'DESC')->paginate(5);
+        $paginador = AbonoApartado::orderBy('created_at', 'DESC')->paginate(5);
         return jsend_success([
             'paginas' => $paginador->lastPage(),
-            'creditos' => $paginador->items(),
+            'abonos_apartado' => $paginador->items(),
         ],);
     }
 
@@ -29,20 +29,20 @@ class CreditoController extends Controller
      */
     public function store(Request $request)
     {
-        Credito::create($request->all());
+        AbonoApartado::create($request->all());
         return jsend_success();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Credito  $credito
+     * @param  \App\Models\AbonoApartado  $abonoApartado
      * @return \Illuminate\Http\Response
      */
-    public function show(Credito $credito)
+    public function show(AbonoApartado $abonoApartado)
     {
-        jsend_success([
-            'credito' => $credito,
+        return jsend_success([
+            'abono_apartado' => $abonoApartado,
         ]);
     }
 
@@ -50,36 +50,36 @@ class CreditoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Credito  $credito
+     * @param  \App\Models\AbonoApartado  $abonoApartado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Credito $credito)
+    public function update(Request $request, AbonoApartado $abonoApartado)
     {
-        $credito->update($request->all());
+        $abonoApartado->update($request->all());
         return jsend_success();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Credito  $credito
+     * @param  \App\Models\AbonoApartado  $abonoApartado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Credito $credito)
+    public function destroy(AbonoApartado $abonoApartado)
     {
-        $credito->delete();
+        $abonoApartado->delete();
         return jsend_success();
     }
 
     public function sincronizar(Request $request)
     {
         $fecha_de_actualizacion = $request->fecha_de_actualizacion;
-        $creditos =  Credito::where('updated_at', '>', $fecha_de_actualizacion)
+        $abonos_apartado =  AbonoApartado::where('updated_at', '>', $fecha_de_actualizacion)
             ->where('sucursal_id', $request->sucursal_id)
             ->get();
 
         return jsend_success([
-            'creditos' => $creditos,
+            'abonos_apartado' => $abonos_apartado,
         ],);
     }
 }
