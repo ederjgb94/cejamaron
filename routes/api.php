@@ -107,9 +107,11 @@ Route::middleware('jsonapi.validate')->group(function () {
 
 
     Route::apiResource('apartados', 'ApartadoController');
+    Route::post('apartados/{apartado}/abonar', 'ApartadoController@abonar')->name('apartado.abonar');
     Route::post('apartados/sincronizar', 'ApartadoController@sincronizar')->name('apartados.sincronizar');
 
     Route::apiResource('creditos', 'CreditoController');
+    Route::post('creditos/{credito}/abonar', 'CreditoController@abonar')->name('credito.abonar');
     Route::post('creditos/sincronizar', 'CreditoController@sincronizar')->name('creditos.sincronizar');
 
     Route::apiResource('abonos_credito', 'AbonoCreditoController');
@@ -124,4 +126,10 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::match(['put', 'patch'], 'clientes_creditos/{clienteCredito}', 'ClienteCreditoController@update')->name('clientes_creditos.update');
     Route::delete('clientes_creditos/{clienteCredito}', 'ClienteCreditoController@destroy')->name('clientes_creditos.destroy');
     Route::post('clientes_creditos/sincronizar', 'ClienteCreditoController@sincronizar')->name('clientes_creditos.sincronizar');
+
+    Route::get('salidas', 'SalidaController@index')->name('salidas.index');
+    Route::post('salidas', 'SalidaController@store')->name('salidas.store');
+    Route::get('salidas/{salida}', 'SalidaController@show')->name('salidas.show');
+    Route::match(['put', 'patch'], 'salidas/{salida}', 'SalidaController@update')->name('salidas.update');
+    Route::post('salidas/canelar/{salida}', 'SalidaController@cancelar')->name('salidas.cancelar');
 });

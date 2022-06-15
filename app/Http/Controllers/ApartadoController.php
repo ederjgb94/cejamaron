@@ -29,7 +29,12 @@ class ApartadoController extends Controller
      */
     public function store(Request $request)
     {
-        Apartado::create($request->all());
+        $apartado = Apartado::create($request->all());
+        $abonos = $request['abonos'];
+
+        foreach ($abonos as $abono) {
+            $apartado->abonos()->create($abono);
+        }
         return jsend_success();
     }
 
@@ -81,5 +86,18 @@ class ApartadoController extends Controller
         return jsend_success([
             'apartados' => $apartados,
         ],);
+    }
+
+    public function abonar(Request $request, Apartado $apartado)
+    {
+        $apartado->abonos()->create($request->all());
+        $total_abonado = $request['total_abonado'];
+        $total_pagado = $apartado->total_pagado;
+        $apartado->total_pagado = $total_pagado + $total_abonado;
+        if ($apartado->total_pagado == $apartado->total) {
+            $apartado->estado = 3;
+        }
+        $apartado->save();
+        return jsend_success();
     }
 }

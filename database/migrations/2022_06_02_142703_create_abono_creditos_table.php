@@ -19,7 +19,7 @@ class CreateAbonoCreditosTable extends Migration
             $table->json('metodo_pago');
             $table->decimal('total_abonado');
             $table->dateTime('fecha');
-            $table->foreignId('cliente_creditos_id')->constrained();
+            $table->foreignId('credito_id')->constrained();
             $table->string('folio_corte');
             $table->foreignId('usuario_id')->constrained();
             $table->timestamps();

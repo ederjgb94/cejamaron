@@ -75,7 +75,6 @@ class AbonoCreditoController extends Controller
     {
         $fecha_de_actualizacion = $request->fecha_de_actualizacion;
         $abonos_credito =  AbonoCredito::where('updated_at', '>', $fecha_de_actualizacion)
-            ->where('sucursal_id', $request->sucursal_id)
             ->get();
 
         return jsend_success([

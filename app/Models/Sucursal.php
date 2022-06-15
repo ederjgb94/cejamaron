@@ -18,26 +18,31 @@ class Sucursal extends Model
         'razon_social',
         'direccion',
         'correo',
+        'telefono',
     ];
 
     protected $hidden = [
         'pivot'
-   ];
+    ];
 
-    public function usuarios(){
+    public function usuarios()
+    {
         return $this->belongsToMany(Usuario::class)->withTimestamps();
     }
 
-    public function productos(){
+    public function productos()
+    {
         return $this->belongsToMany(Producto::class)->withTimestamps()
-        ->withPivot(['cantidad']);
+            ->withPivot(['cantidad']);
     }
 
-    public function entradas(){
+    public function entradas()
+    {
         return $this->hasMany(Entrada::class);
     }
 
-    public function cortes(){
+    public function cortes()
+    {
         return $this->hasMany(Cortes::class);
     }
 }

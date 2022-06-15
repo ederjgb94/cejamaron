@@ -14,7 +14,7 @@ class AbonoApartado extends Model
         'metodo_pago',
         'total_abonado',
         'fecha',
-        'clientes_creditos_id',
+        'apartado_id',
         'folio_corte',
         'usuario_id',
     ];

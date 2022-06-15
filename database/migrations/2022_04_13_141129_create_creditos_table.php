@@ -21,7 +21,6 @@ class CreateCreditosTable extends Migration
             $table->json('productos');
             $table->decimal('total');
             $table->decimal('total_pagado');
-            $table->json('metodo_pago');
             $table->dateTime('fecha_de_credito');
             $table->string('folio')->unique();
             $table->foreignId('sucursal_id')->nullable()->constrained();

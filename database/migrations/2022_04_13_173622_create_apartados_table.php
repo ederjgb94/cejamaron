@@ -23,7 +23,6 @@ class CreateApartadosTable extends Migration
             $table->json('productos');
             $table->decimal('total');
             $table->decimal('total_pagado');
-            $table->json('metodo_pago');
             $table->dateTime('fecha_de_apartado');
             $table->string('folio')->unique();
             $table->dateTime('fecha_entrega')->nullable();

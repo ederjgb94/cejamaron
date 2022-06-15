@@ -16,7 +16,6 @@ class Apartado extends Model
         'productos',
         'total',
         'total_pagado',
-        'metodo_pago',
         'fecha_de_apartado',
         'folio',
         'fecha_entrega',

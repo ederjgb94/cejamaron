@@ -14,7 +14,7 @@ class AbonoCredito extends Model
         'metodo_pago',
         'total_abonado',
         'fecha',
-        'clientes_creditos_id',
+        'credito_id',
         'folio_corte',
         'usuario_id',
     ];

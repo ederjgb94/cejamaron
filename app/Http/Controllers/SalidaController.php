@@ -14,7 +14,11 @@ class SalidaController extends Controller
      */
     public function index()
     {
-        //
+        $paginador = Salida::orderBy('created_at', 'DESC')->paginate(5);
+        return jsend_success([
+            'paginas' => $paginador->lastPage(),
+            'salidas' => $paginador->items(),
+        ],);
     }
 
     /**
@@ -25,7 +29,8 @@ class SalidaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Salida::create($request->all());
+        return jsend_success();
     }
 
     /**
@@ -36,7 +41,9 @@ class SalidaController extends Controller
      */
     public function show(Salida $salida)
     {
-        //
+        return jsend_success([
+            'salida' => $salida,
+        ]);
     }
 
     /**
@@ -48,7 +55,8 @@ class SalidaController extends Controller
      */
     public function update(Request $request, Salida $salida)
     {
-        //
+        $salida->update($request->all());
+        return jsend_success();
     }
 
     /**
@@ -60,5 +68,13 @@ class SalidaController extends Controller
     public function destroy(Salida $salida)
     {
         //
+    }
+
+    public function cancelar(Salida $salida)
+    {
+        $salida->update(
+            ['canelado' => true]
+        );
+        return jsend_success();
     }
 }

@@ -15,11 +15,19 @@ class CreateSalidasTable extends Migration
     {
         Schema::create('salidas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sucursal_id')->nullable()->constrained();
+
+            $table->unsignedBigInteger('id_sucursal_origen');
+            $table->foreign('id_sucursal_origen')->references('id')->on('sucursals');
+
+            $table->unsignedBigInteger('id_sucursal_destino');
+            $table->foreign('id_sucursal_destino')->references('id')->on('sucursals');
+
+            $table->json('productos');
             $table->string('folio')->unique();
             $table->date('fecha_salida');
             $table->foreignId('usuario_id')->constrained();
             $table->decimal('total_importe');
+            $table->boolean('cancelado')->default(false);
             $table->timestamps();
         });
     }

@@ -24,6 +24,7 @@ class CreateSucursalsTable extends Migration
             $table->string('razon_social');
             $table->string('direccion');
             $table->string('correo');
+            $table->string('telefono')->nullable();
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });

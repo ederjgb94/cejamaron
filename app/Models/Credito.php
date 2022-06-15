@@ -15,7 +15,6 @@ class Credito extends Model
         'productos',
         'total',
         'total_pagado',
-        'metodo_pago',
         'fecha_de_credito',
         'folio',
         'sucursal_id',

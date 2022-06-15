@@ -29,7 +29,11 @@ class CreditoController extends Controller
      */
     public function store(Request $request)
     {
-        Credito::create($request->all());
+        $credito = Credito::create($request->all());
+        $abonos = $request['abonos'];
+        foreach ($abonos as $abono) {
+            $credito->abonos()->create($abono);
+        }
         return jsend_success();
     }
 
@@ -81,5 +85,18 @@ class CreditoController extends Controller
         return jsend_success([
             'creditos' => $creditos,
         ],);
+    }
+
+    public function abonar(Request $request, Credito $credito)
+    {
+        $credito->abonos()->create($request->all());
+        $total_abonado = $request['total_abonado'];
+        $total_pagado = $credito->total_pagado;
+        $credito->total_pagado = $total_pagado + $total_abonado;
+        if ($credito->total_pagado == $credito->total) {
+            $credito->estado = 3;
+        }
+        $credito->save();
+        return jsend_success();
     }
 }
