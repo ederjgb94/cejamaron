@@ -51,6 +51,7 @@ class EntradaController extends Controller
                 ]
             ]);
         }
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 

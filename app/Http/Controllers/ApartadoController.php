@@ -35,6 +35,7 @@ class ApartadoController extends Controller
         foreach ($abonos as $abono) {
             $apartado->abonos()->create($abono);
         }
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 
@@ -61,6 +62,7 @@ class ApartadoController extends Controller
     public function update(Request $request, Apartado $apartado)
     {
         $apartado->update($request->all());
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 
@@ -73,6 +75,7 @@ class ApartadoController extends Controller
     public function destroy(Apartado $apartado)
     {
         $apartado->delete();
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 
@@ -98,6 +101,7 @@ class ApartadoController extends Controller
             $apartado->estado = 3;
         }
         $apartado->save();
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 }
