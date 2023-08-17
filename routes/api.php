@@ -92,6 +92,8 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::get('proveedores/{proveedor}', 'ProveedorController@show')->name('proveedor.show');
     Route::match(['put', 'patch'], 'proveedores/{proveedor}', 'ProveedorController@update')->name('proveedor.update');
     Route::post('proveedores/{proveedor}/agregar_cuenta_bancaria', 'ProveedorController@agregar_cuenta_bancaria')->name('proveedor.agregar_cuenta_bancaria');
+    Route::post('proveedores/sincronizar', 'ProveedorController@sincronizar')->name('proveedor.sincronizar');
+
 
     Route::get('cuentas_bancarias', 'CuentaBancariaController@index')->name('cuentas_bancarias.index');
     Route::get('cuentas_bancarias/{cuentaBancaria}', 'CuentaBancariaController@show')->name('cuentas_bancarias.show');
@@ -102,9 +104,6 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::post('cortes', 'CorteController@store')->name('cortes.store');
     Route::get('cortes/{corte}', 'CorteController@show')->name('cortes.show');
     Route::match(['put', 'patch'], 'CorteController@update')->name('cortes.update');
-
-
-
 
     Route::apiResource('apartados', 'ApartadoController');
     Route::post('apartados/{apartado}/abonar', 'ApartadoController@abonar')->name('apartado.abonar');

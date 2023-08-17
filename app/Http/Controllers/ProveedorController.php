@@ -42,7 +42,7 @@ class ProveedorController extends Controller
     public function show(Proveedor $proveedor)
     {
         return jsend_success([
-            'proveedor'=>$proveedor,
+            'proveedor' => $proveedor,
         ]);
     }
 
@@ -59,9 +59,19 @@ class ProveedorController extends Controller
         return jsend_success();
     }
 
-    public function agregar_cuenta_bancaria(Request $request, Proveedor $proveedor){
+    public function agregar_cuenta_bancaria(Request $request, Proveedor $proveedor)
+    {
         $proveedor->cuentas_bancarias()->create($request->all());
         return jsend_success();
     }
 
+    public function sincronizar(Request $request)
+    {
+        $fecha_de_actualizacion = $request->fecha_de_actualizacion;
+        $proveedores =  Proveedor::where('updated_at', '>', $fecha_de_actualizacion)->get();
+
+        return jsend_success([
+            'proveedores' => $proveedores,
+        ],);
+    }
 }
