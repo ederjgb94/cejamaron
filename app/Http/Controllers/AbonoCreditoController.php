@@ -30,6 +30,7 @@ class AbonoCreditoController extends Controller
     public function store(Request $request)
     {
         AbonoCredito::create($request->all());
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 

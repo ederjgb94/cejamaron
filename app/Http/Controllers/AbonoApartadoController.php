@@ -30,6 +30,7 @@ class AbonoApartadoController extends Controller
     public function store(Request $request)
     {
         AbonoApartado::create($request->all());
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 
@@ -56,6 +57,7 @@ class AbonoApartadoController extends Controller
     public function update(Request $request, AbonoApartado $abonoApartado)
     {
         $abonoApartado->update($request->all());
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 
@@ -68,6 +70,7 @@ class AbonoApartadoController extends Controller
     public function destroy(AbonoApartado $abonoApartado)
     {
         $abonoApartado->delete();
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 

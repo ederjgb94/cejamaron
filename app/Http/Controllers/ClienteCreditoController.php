@@ -30,6 +30,7 @@ class ClienteCreditoController extends Controller
     public function store(Request $request)
     {
         $cliente = ClienteCredito::create($request->all());
+        $this->sincronizarFirebase();
         return jsend_success(
             [
                 'cliente_creditos_id' => $cliente->id,
@@ -60,6 +61,7 @@ class ClienteCreditoController extends Controller
     public function update(Request $request, ClienteCredito $clienteCredito)
     {
         $clienteCredito->update($request->all());
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 

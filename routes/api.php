@@ -91,7 +91,9 @@ Route::middleware('jsonapi.validate')->group(function () {
     Route::post('proveedores', 'ProveedorController@store')->name('proveedor.store');
     Route::get('proveedores/{proveedor}', 'ProveedorController@show')->name('proveedor.show');
     Route::match(['put', 'patch'], 'proveedores/{proveedor}', 'ProveedorController@update')->name('proveedor.update');
+    Route::post('proveedores/sincronizar', 'ProveedorController@sincronizar')->name('proveedores.sincronizar');
     Route::post('proveedores/{proveedor}/agregar_cuenta_bancaria', 'ProveedorController@agregar_cuenta_bancaria')->name('proveedor.agregar_cuenta_bancaria');
+    Route::post('proveedores/sincronizar', 'ProveedorController@sincronizar')->name('proveedor.sincronizar');
 
     Route::get('cuentas_bancarias', 'CuentaBancariaController@index')->name('cuentas_bancarias.index');
     Route::get('cuentas_bancarias/{cuentaBancaria}', 'CuentaBancariaController@show')->name('cuentas_bancarias.show');

@@ -34,6 +34,7 @@ class CreditoController extends Controller
         foreach ($abonos as $abono) {
             $credito->abonos()->create($abono);
         }
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 
@@ -60,6 +61,7 @@ class CreditoController extends Controller
     public function update(Request $request, Credito $credito)
     {
         $credito->update($request->all());
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 
@@ -72,6 +74,7 @@ class CreditoController extends Controller
     public function destroy(Credito $credito)
     {
         $credito->delete();
+        $this->sincronizarFirebase();
         return jsend_success();
     }
 

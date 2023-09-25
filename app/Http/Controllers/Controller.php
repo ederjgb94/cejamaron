@@ -14,6 +14,6 @@ class Controller extends BaseController
 
     public function sincronizarFirebase()
     {
-        // Localupdater::dispatch()->delay(3);
+        Localupdater::dispatch()->delay(3);
     }
 }

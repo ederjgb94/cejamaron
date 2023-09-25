@@ -58,16 +58,18 @@ class ProductoSucursalController extends Controller
         );
     }
 
-    public function existencia_producto(Producto $producto){
+    public function existencia_producto(Producto $producto)
+    {
         return jsend_success([
-            'existencias'=>$producto->sucursales()
-            ->get(
-                [
-                    'id',
-                    'razon_social',
-                    'direccion',
-                    'cantidad',
-                ])
+            'existencias' => $producto->sucursales()
+                ->get(
+                    [
+                        'id',
+                        'razon_social',
+                        'direccion',
+                        'cantidad',
+                    ]
+                )
         ]);
     }
 
