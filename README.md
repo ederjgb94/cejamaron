@@ -57,7 +57,6 @@ Cejamaron es una aplicación web construida con el framework [Laravel](https://l
 - MySQL
 - JavaScript (Vue.js, opcional)
 - [.NET para consumo de la API]
-- [Agrega otras tecnologías relevantes]
 
 ## Contribución
 
